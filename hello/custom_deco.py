@@ -42,7 +42,6 @@ def _install_with_pip(file=None, packages=None):
 
 
 def pip(file=None, packages=None):
-    print("Installing packages dynamically...")
     def decorator(function):
         @wraps(function)
         def wrapper(*args, **kwargs):
