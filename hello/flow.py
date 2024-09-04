@@ -1,17 +1,17 @@
 from metaflow import FlowSpec, step, nvidia, pypi, conda, kubernetes, card, current
 from metaflow_extensions.outerbounds.profilers import gpu_profile
 from metaflow.cards import ProgressBar
-from custom_deco import pip
-
 
 class HelloDGXCloud(FlowSpec):
 
     @card(type="blank", refresh_interval=1)
     @gpu_profile(interval=1)
-    @pip(packages={'torch': '2.3.1'})
+    @pypi(python='3.12', packages={'torch': '2.3.1'})
     @nvidia
     @step
     def start(self):
+        import os
+        print(os.system("nvidia-smi"))
         import torch # pylint: disable=import-error
         print(
             f"Hello from {torch.__name__} version {torch.__version__}!"
